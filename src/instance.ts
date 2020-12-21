@@ -17,10 +17,6 @@ function generateRandomId() {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16);
 }
 
-class GoWasmRuntime {
-    constructor() {}
-}
-
 export class GoWasmInstance {
     private _module: WebAssembly.Module;
     private _id: string;
