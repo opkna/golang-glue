@@ -1,0 +1,10 @@
+{
+  "name": "golang-glue",
+  "version": "0.0.1",
+  "description": "Glue code for using WebAssembly compiled from GO",
+  "main": "dist/index.js",
+  "repository": "https://github.com/opkna/golang-glue.git",
+  "author": "Oscar Persson <oscar.persson1993@gmail.com>",
+  "license": "MIT",
+  "private": false
+}

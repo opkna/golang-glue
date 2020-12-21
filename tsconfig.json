@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["DOM", "ES2015"]
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+}
