@@ -10,9 +10,17 @@
     "private": false,
     "scripts": {
         "compileWasm": "./test/util/compile.sh",
-        "build": "tsc"
+        "build": "tsc",
+        "test": "karma start --reporters=verbose"
     },
     "devDependencies": {
+        "@types/jasmine": "^3.6.2",
+        "jasmine-core": "^3.6.0",
+        "karma": "^5.2.3",
+        "karma-firefox-launcher": "^2.1.0",
+        "karma-jasmine": "^4.0.1",
+        "karma-typescript": "^5.2.0",
+        "karma-verbose-reporter": "^0.0.6",
         "typescript": "^4.1.3"
     }
 }

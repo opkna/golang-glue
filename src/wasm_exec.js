@@ -19,12 +19,6 @@
         );
     }
 
-    const enosys = () => {
-        const err = new Error("not implemented");
-        err.code = "ENOSYS";
-        return err;
-    };
-
     if (!global.fs) {
         let outputBuf = "";
         global.fs = {
@@ -44,6 +38,18 @@
                     outputBuf = outputBuf.substr(nl + 1);
                 }
                 return buf.length;
+            },
+            write(fd, buf, offset, length, position, callback) {
+                if (
+                    offset !== 0 ||
+                    length !== buf.length ||
+                    position !== null
+                ) {
+                    callback(enosys());
+                    return;
+                }
+                const n = this.writeSync(fd, buf);
+                callback(null, n);
             },
         };
     }

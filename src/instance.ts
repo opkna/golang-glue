@@ -1,3 +1,5 @@
+import "./wasm_exec";
+
 declare global {
     interface Window {
         __jsbridge: {

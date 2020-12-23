@@ -13,17 +13,21 @@ func main() {
 	if os.Args[0] != "js" {
 		panic("Expected first argument to be 'js'")
 	}
+
 	bridge := js.Global()
 	for i := range os.Args[1:] {
 		bridge = bridge.Get(os.Args[1:][i])
 	}
 
-	bridge.Set("bounce", js.FuncOf(bounce))
+	bridge.Set("add", js.FuncOf(add))
 	select {}
 }
 
 // This will just return the first argument
-func bounce(this js.Value, args []js.Value) interface{} {
-	this.Set("result", args[0])
+func add(this js.Value, args []js.Value) interface{} {
+	a := args[0].Int()
+	b := args[1].Int()
+
+	this.Set("result", js.ValueOf(a+b))
 	return nil
 }

@@ -1,8 +1,8 @@
 import { GoWasmInstance } from "./instance";
 
 export class GoWasmModule {
-    _module: WebAssembly.Module | undefined;
-    _initPromise: Promise<void> | undefined;
+    private _module: WebAssembly.Module | undefined;
+    private _initPromise: Promise<void> | undefined;
 
     constructor(url: string | URL);
     constructor(request: Promise<Response>);
@@ -22,7 +22,7 @@ export class GoWasmModule {
         this._initPromise = this._init(request);
     }
 
-    async _init(request: Promise<Response>) {
+    private async _init(request: Promise<Response>) {
         try {
             this._module = await WebAssembly.compileStreaming(request);
         } catch (err) {
@@ -30,6 +30,18 @@ export class GoWasmModule {
             this._module = undefined;
             this._initPromise = undefined;
         }
+    }
+
+    async waitForCompile() {
+        // Check if this._initPromise has not yet been resolved
+        if (this._initPromise instanceof Promise) {
+            await this._initPromise;
+            this._initPromise = undefined;
+        }
+    }
+
+    isReady() {
+        return this._initPromise === undefined && this._module !== undefined;
     }
 
     async createInstance<T extends object>() {
